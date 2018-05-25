@@ -1,0 +1,71 @@
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    <style>
+        .row {
+
+        }
+
+        .element {
+            display: inline-block;
+            padding: 5px;
+            padding-top: 10px;
+            border: 5px solid #555555;
+            margin: 1px;
+            margin-top: 2px;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            user-select: none;
+        }
+    </style>
+
+    <script type="text/jsx">
+			class TicTacToe extends React.Component {
+				constructor(props) {
+					super(props);
+					this.state = {
+						data: [
+							[false, false, false],
+							[false, false, false],
+							[false, false, false]
+						]
+					};
+					this.onElementClick.bind(this);
+				}
+
+				onElementClick(x, y) {
+					this.state.data[y][x] = !this.state.data[y][x];
+					this.setState({data: [...this.state.data]});
+				}
+
+				render() {
+					return (
+						<div>
+							{this.state.data.map((y, index_y, arr1) => (
+								<div class='row'>
+									{y.map((x, index_x, arr2) => (
+										<div class='element' onClick={(e) => this.onElementClick(index_x, index_y)}>
+											{x ? 'X' : 'O'}
+										</div>
+									))}
+								</div>))}
+						</div>
+					);
+				}
+			}
+
+			ReactDOM.render(
+				<div>
+					<TicTacToe/>
+				</div>,
+				document.getElementById('root')
+			);
+    </script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+</html>
